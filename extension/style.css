@@ -1,36 +1,40 @@
 body{
     font-family: Arial;
-    width: 300px;
+    width: 320px;
     padding: 15px;
     background:#1e1e1e;
     color:#e5e5e5;
-    text-align:center;
 }
 
 h2{
+    text-align:center;
     margin-bottom:15px;
 }
 
 .card{
     background:#2b2b2b;
-    padding:15px;
-    border-radius:8px;
+    padding:18px;
+    border-radius:10px;
+}
+
+.section{
+    margin-bottom:12px;
 }
 
 .label{
     font-size:12px;
-    color:#a0a0a0;
-    margin-top:10px;
+    color:#9aa0a6;
+    margin-bottom:3px;
 }
 
-#url{
-    font-size:13px;
-    word-break:break-all;
+.value{
+    font-size:14px;
 }
 
 button{
-    margin-top:12px;
-    padding:8px 12px;
+    width:100%;
+    margin-top:10px;
+    padding:8px;
     background:#3a3a3a;
     border:none;
     color:white;
@@ -42,8 +46,14 @@ button:hover{
     background:#505050;
 }
 
-.resultBox{
-    margin-top:15px;
+input{
+    width:100%;
+    padding:8px;
+    margin-top:6px;
+    border-radius:6px;
+    border:none;
+    background:#3a3a3a;
+    color:white;
 }
 
 .safe{
@@ -54,4 +64,31 @@ button:hover{
 .phishing{
     color:#ff5252;
     font-weight:bold;
+}
+
+.details{
+    font-size:13px;
+    line-height:1.6;
+    margin-top:6px;
+}
+
+/* structured detail rows */
+
+.detail-row{
+    display:flex;
+    justify-content:space-between;
+    padding:4px 0;
+    border-bottom:1px solid #3a3a3a;
+}
+
+.detail-row:last-child{
+    border-bottom:none;
+}
+
+.good{
+    color:#4CAF50;
+}
+
+.bad{
+    color:#ff5252;
 }

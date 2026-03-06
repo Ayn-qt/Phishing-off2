@@ -11,16 +11,36 @@
 
 <div class="card">
 
-<p class="label">Current URL</p>
-<p id="url">Press scan to analyze</p>
+<div class="section">
+<div class="label">URL</div>
+<div id="url" class="value">Press scan to analyze</div>
+</div>
 
-<button id="check">Scan Website</button>
+<button id="check">Scan Current Website</button>
 
-<div class="resultBox">
+<hr>
 
-<p class="label">Status</p>
-<p id="result">Waiting for scan</p>
+<div class="section">
+<div class="label">Paste Suspicious Link</div>
+<input id="urlInput" placeholder="https://example.com">
+<button id="scanInput">Check Link</button>
+</div>
 
+<hr>
+
+<div class="section">
+<div class="label">Status</div>
+<div id="result" class="value">Waiting for scan</div>
+</div>
+
+<div class="section">
+<div class="label">Risk Score</div>
+<div id="risk" class="value">--</div>
+</div>
+
+<div class="section">
+<div class="label">Details</div>
+<div id="details" class="details"></div>
 </div>
 
 </div>
