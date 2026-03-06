@@ -8,11 +8,13 @@ The extension analyzes the current website URL and sends it to a local API that 
 
 ## Features
 
-* Detects phishing websites using a machine learning model
-* Uses a Random Forest classifier trained on phishing and legitimate URLs
-* Browser extension interface for Brave or Chrome
-* Displays prediction results directly in the extension popup
-* Lightweight system running locally
+* Scan the current website directly from the browser
+* Analyze suspicious links pasted from emails or messages
+* Machine learning based phishing detection
+* Risk score generation for websites
+* Structured security report showing URL indicators
+* Flask API backend for model inference
+* Lightweight browser extension interface
 
 ---
 
