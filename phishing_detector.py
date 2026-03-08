@@ -10,7 +10,6 @@ import re
 import pickle
 import numpy as np
 
-# Feature extraction
 def extract_features(url):
     try:
         return [
@@ -37,7 +36,6 @@ feature_names = ["length", "has_ip", "special_chars", "is_https", "has_www", "ha
                  "digits", "dots", "hyphens", "keyword_flag", "tld_flag", "short_flag",
                  "url_entropy", "has_at", "double_slash"]
 
-# Load dataset
 print("Loading dataset...")
 chunks = []
 for chunk in pd.read_csv("phishing_site_url.csv", chunksize=50000):
@@ -45,7 +43,7 @@ for chunk in pd.read_csv("phishing_site_url.csv", chunksize=50000):
 df = pd.concat(chunks, ignore_index=True)
 print(f"Loaded {len(df):,} URLs")
 
-# Prepare data
+
 df.columns = df.columns.str.strip()
 df = df[["URL", "Label"]]
 df.columns = ["url", "label"]
@@ -57,7 +55,7 @@ df = df.dropna(subset=["label"]).astype({"label": int})
 
 print(f"Safe: {(df['label']==0).sum():,}, Phishing: {(df['label']==1).sum():,}")
 
-# Sample if too large
+
 if len(df) > 150000:
     print("Sampling 150k URLs...")
     df = pd.concat([
@@ -65,19 +63,19 @@ if len(df) > 150000:
         df[df['label']==1].sample(75000, random_state=42)
     ]).sample(frac=1, random_state=42).reset_index(drop=True)
 
-# Extract features
+
 print("Extracting features...")
 X = pd.DataFrame([extract_features(url) for url in df["url"]], columns=feature_names)
 y = df["label"].values
 
-# Train model
+
 print("Training model...")
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
 
 model = RandomForestClassifier(n_estimators=200, max_depth=20, random_state=42, n_jobs=-1)
 model.fit(X_train, y_train)
 
-# Evaluate
+
 preds = model.predict(X_test)
 accuracy = accuracy_score(y_test, preds)
 
@@ -90,12 +88,12 @@ print(f"\nConfusion Matrix:")
 print(f"True Negatives: {cm[0][0]:,} | False Positives: {cm[0][1]:,}")
 print(f"False Negatives: {cm[1][0]:,} | True Positives: {cm[1][1]:,}")
 
-# Save model
+
 with open("phishing_model.pkl", "wb") as f:
     pickle.dump((model, feature_names), f)
 print("\n✓ Model saved as 'phishing_model.pkl'")
 
-# Interactive checker
+
 print(f"\n{'='*50}")
 print("PHISHING URL CHECKER")
 print(f"{'='*50}\n")
@@ -116,7 +114,7 @@ while True:
     
     print(f"\n{'─'*50}")
     if pred == 1:
-        print(f"⚠️  WARNING: PHISHING ({prob[1]*100:.1f}% confidence)")
+        print(f"  WARNING: PHISHING ({prob[1]*100:.1f}% confidence)")
     else:
-        print(f"✅ SAFE ({prob[0]*100:.1f}% confidence)")
+        print(f" SAFE ({prob[0]*100:.1f}% confidence)")
     print(f"{'─'*50}\n")
