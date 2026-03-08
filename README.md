@@ -5,6 +5,9 @@ Phishing-off is a browser extension that detects potentially malicious or phishi
 The extension analyzes the current website URL and sends it to a local API that evaluates whether the site is safe or potentially phishing.
 
 ---
+##Extension-Interface
+
+images/extension-ui.png
 
 ## Features
 
