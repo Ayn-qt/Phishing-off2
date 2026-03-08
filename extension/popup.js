@@ -23,12 +23,8 @@ async function checkURL(url){
 
         const data = await response.json();
 
-        /* STATUS */
-
         result.textContent = data.status;
         result.className = data.status === "PHISHING" ? "phishing" : "safe";
-
-        /* RISK SCORE */
 
         riskText.textContent = data.risk_score + "%";
         if(data.risk_score < 30){
@@ -42,8 +38,6 @@ async function checkURL(url){
         }
 
           
-
-        /* DETAILS REPORT */
 
         let detailsHTML = "";
 
@@ -84,7 +78,7 @@ async function checkURL(url){
 
 }
 
-/* scan current website */
+
 
 scanCurrent.addEventListener("click", async ()=>{
 
@@ -102,7 +96,6 @@ scanCurrent.addEventListener("click", async ()=>{
 
 });
 
-/* scan pasted link */
 
 scanInput.addEventListener("click", ()=>{
 
