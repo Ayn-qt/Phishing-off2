@@ -7,7 +7,7 @@ The extension analyzes the current website URL and sends it to a local API that 
 ---
 ## Extension-Interface
 
-images/extension-ui.png
+![Phishing Detector UI](images/extension-ui.png)
 
 ## Features
 
