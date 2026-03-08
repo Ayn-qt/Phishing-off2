@@ -9,49 +9,30 @@ import re
 app = Flask(__name__)
 CORS(app)
 
-# Load trained model
 with open("phishing_model.pkl", "rb") as f:
     model, feature_names = pickle.load(f)
-
-
-# ---------- SECURITY CHECKS ----------
-
 def check_ssl(url):
     return url.startswith("https")
-
-
 def check_ip(url):
     return bool(re.search(r'(\d{1,3}\.){3}\d{1,3}', url))
-
-
 def check_keywords(url):
     keywords = ["login", "verify", "secure", "update", "confirm", "account", "bank"]
-    return any(k in url.lower() for k in keywords)
+    return any(k in url.lower() for k in keywords
 
-
-# ---------- API ----------
-
+               
 @app.route("/predict", methods=["POST"])
 def predict():
 
     data = request.get_json()
     url = data.get("url")
-
-    # ML prediction
     features = extract_features(url)
     df = pd.DataFrame([features], columns=feature_names)
-
     prediction = model.predict(df)[0]
     probability = model.predict_proba(df)[0]
-
-    # additional checks
     ssl_valid = check_ssl(url)
     ip_flag = check_ip(url)
     keyword_flag = check_keywords(url)
-
-    # risk score calculation
     risk = 0
-
     if not ssl_valid:
         risk += 30
 
